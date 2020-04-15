@@ -1,0 +1,8 @@
+gunicorn==0.14.0
+gevent
+flask
+flask-sqlalchemy
+flask-migrate
+pymysql
+flask-wtf
+flask_login

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="width:1000px;height:1000px;">
+	{% if article %}
+	<h1><strong>{{article.title}}</strong>
+	<hr>写于：{{article.time}}
+<!-- Editor 容器 -->
+<div class="content editormd-preview-theme" id="article">
+     <textarea style="display:none;" >{{article.body}}</textarea>      
+</div>
+	{%endif%}
+</div>
+
+{% endblock %}

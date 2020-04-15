@@ -1,0 +1,27 @@
+{% extends 'article_base.html' %}
+
+{% block content %} 
+    <form action="" method="post" style="width:1000px;height:1000px;" >
+	<div class="center_editor">
+	 {{ form.hidden_tag() }}
+	
+	<p>
+            {{ form.title.label }}<br>
+            {{ form.title(cols=150, rows=2) }}<br>
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.head.label }}<br>
+	    {{ form.head(cols=150, rows=2) }}<br>
+            {% for error in form.head.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<div id="txtblogcontent">
+        <textarea id="body" name="body" style="display:none;"></textarea>
+        </div>
+	<p>{{ form.submit() }}</p>	
+    </form>
+{% endblock %}

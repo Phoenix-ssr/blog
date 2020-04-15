@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/static/css/textbase.css">
+<link rel="stylesheet" type="text/css" href="/static/css/Navigation.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="/static/editor.md/css/editormd.min.css">
+<link rel="stylesheet" href="/static/editor.md/css/editormd.preview.css" />
+<script src="/static/editor.md/lib/marked.min.js"></script>
+ <script src="/static/editor.md/lib/prettify.min.js"></script>
+ <script src="/static/editor.md/lib/raphael.min.js"></script>
+ <script src="/static/editor.md/lib/underscore.min.js"></script>
+ <script src="/static/editor.md/lib/sequence-diagram.min.js"></script>
+ <script src="/static/editor.md/lib/flowchart.min.js"></script>
+ <script src="/static/editor.md/lib/jquery.flowchart.min.js"></script>
+ <script src="/static/editor.md/editormd.min.js"></script>
+ <script type="text/javascript">
+	var testEditor;
+	$(function () {
+		testEditor = editormd.markdownToHTML("article", {
+			htmlDecode: "style,script,iframe",  // you can filter tags decode
+			emoji: true,
+			taskList: true,
+			tex: true,  // 默认不解析
+			flowChart: true,  // 默认不解析
+			sequenceDiagram: true,  // 默认不解析
+			codeFold: true,
+	});
+});
+ </script>
+
+     {% if title %}
+        <title>{{title}} - 博客</title>
+        {% else %}
+        <title>欢迎来到博客!</title>
+        {% endif %}
+ </head>
+	<ul class="ul">
+	<li class="li">导航：<a href="{{ url_for('index') }}">首页</a></li>
+	<div class="dropdown">
+	<li class="li"><a href="#">文章</a></li>
+        	 <div class="dropdown-content">
+         	<a href="#">1</a>
+         	 <a href="#"> 2</a>
+        	 <a href="#">3</a>
+ 	</div>
+	 </div>
+	{% if current_user.is_anonymous %}
+        <li class="li"><a href="{{url_for('login')}}">登录</a></li>
+        {% else %}
+        <li class="li"><a href="{{ url_for('user', username=current_user.username) }}">用户中心</a></li>
+	<li class="li"><a href="{{url_for('article')}}">编辑</a></li>
+        <li class="li"><a href="{{url_for('logout')}}">退出登录</a></li>
+        {% endif %}
+	<li class="li"><a href="#">关于我</a></li>
+        </ul>
+	 {% with messages = get_flashed_messages() %}
+           {% if messages %}
+            <ur>
+                {% for message in messages %}
+                    <li>{{ message }}</li>>
+                {% endfor %}
+            </ur>
+           {% endif %}         
+       {% endwith %}
+	<div class="left">
+		<div class="portrait"> 
+		</div>
+		<p>Phoenix's blog
+		<br>君子不行陌路
+		<hr>
+		</p>
+	</div>
+	<div class="left2">
+	<h1>友情链接</h1>
+	<ul class="">
+	<li class="vertical"><a href="https://www.liaoxuefeng.com/wiki/1016959663602400">python学习</a></li>
+	<li class="vertical"><a href="http://jsrun.net/new?v=2">JSRUN</a></li>
+	<li class="vertical"><a href="https://www.patest.cn/practice">PAT</a></li> 
+	</ul>
+
+
+  
+	</div>
+
+	<div class="center photo">
+		{% block content %}
+		{% endblock %}
+	</div>
+<script opacity="1" color="50,250,205" pointColor="0,255,255"count="400" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
+</body>
+</html>
+
